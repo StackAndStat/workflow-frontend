@@ -1,0 +1,496 @@
+.todoCard {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.todoCard:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.todoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.todoContent {
+  flex: 1;
+  min-width: 0; /* Prevents flex item from overflowing */
+}
+
+.todoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e0e6ed;
+  margin-bottom: 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.todoDescription {
+  color: #a0aec0;
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0; /* Prevents buttons from shrinking */
+}
+
+.iconButton {
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e0e6ed;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px; /* Minimum touch target size */
+  min-height: 36px;
+}
+
+.iconButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.deleteButton {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.deleteButton:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.todoMeta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap; /* Prevents badges from breaking */
+}
+
+/* Status Badges */
+.todo {
+  background-color: rgba(156, 163, 175, 0.1);
+  border: 1px solid rgba(156, 163, 175, 0.3);
+  color: #9ca3af;
+}
+
+.inProgress {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+}
+
+.completed {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+/* Priority Badges */
+.low {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.medium {
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #f59e0b;
+}
+
+.high {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.category {
+  background-color: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  color: #667eea;
+}
+
+.dueDate {
+  font-size: 12px;
+  color: #a0aec0;
+  white-space: nowrap;
+}
+
+.confirmationOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.confirmationModal {
+  background: #1a1f3a;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.confirmationModal h3 {
+  margin: 0 0 16px 0;
+  color: #e0e6ed;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.confirmationModal p {
+  margin: 0 0 24px 0;
+  color: #a0aec0;
+  line-height: 1.5;
+}
+
+.confirmationButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e0e6ed;
+  font-weight: 500;
+  transition: all 0.3s;
+  min-width: 80px;
+}
+
+.confirmButton {
+  padding: 10px 20px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+  min-width: 80px;
+}
+
+.cancelButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.confirmButton:hover {
+  background: #dc2626;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .todoCard {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .todoTitle {
+    font-size: 17px;
+  }
+
+  .todoDescription {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .actionButtons {
+    gap: 6px;
+  }
+
+  .iconButton {
+    padding: 7px;
+    min-width: 34px;
+    min-height: 34px;
+  }
+
+  /* Add to your existing TodoCard.module.css */
+
+  .completeButton {
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+
+  .completeButton:hover {
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+
+  /* Optional: Add a subtle animation when task is completed */
+  .todoCard.completed {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .todoMeta {
+    gap: 10px;
+  }
+
+  .badge {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .todoCard {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .todoCard:hover {
+    transform: none; /* Remove hover effects on mobile */
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .todoHeader {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .todoContent {
+    width: 100%;
+  }
+
+  .todoTitle {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .todoDescription {
+    font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .actionButtons {
+    align-self: flex-end;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .iconButton {
+    padding: 10px;
+    min-width: 44px; /* Minimum touch target for mobile */
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .todoMeta {
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .badge {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .dueDate {
+    font-size: 11px;
+  }
+
+  /* Confirmation Modal Mobile Styles */
+  .confirmationOverlay {
+    padding: 12px;
+    align-items: flex-end; /* Bottom sheet style for mobile */
+  }
+
+  .confirmationModal {
+    padding: 20px;
+    border-radius: 16px 16px 12px 12px;
+    max-width: none;
+  }
+
+  .confirmationButtons {
+    flex-direction: column-reverse; /* Better for thumb reach */
+    gap: 8px;
+  }
+
+  .cancelButton,
+  .confirmButton {
+    width: 100%;
+    padding: 12px;
+    min-width: auto;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .todoCard {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .todoHeader {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .todoTitle {
+    font-size: 15px;
+  }
+
+  .todoDescription {
+    font-size: 12px;
+  }
+
+  .actionButtons {
+    gap: 6px;
+  }
+
+  .iconButton {
+    padding: 8px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .todoMeta {
+    gap: 6px;
+  }
+
+  .badge {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+
+  .confirmationModal {
+    padding: 18px;
+  }
+
+  .confirmationModal h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .confirmationModal p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+  .todoCard {
+    padding: 12px;
+  }
+
+  .todoMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .badge {
+    padding: 4px 8px;
+  }
+}
+
+/* Large Desktop Enhancement */
+@media (min-width: 1440px) {
+  .todoCard {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .todoTitle {
+    font-size: 20px;
+  }
+
+  .todoDescription {
+    font-size: 15px;
+  }
+
+  .iconButton {
+    padding: 10px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 16px;
+  }
+
+  .badge {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .todoCard,
+  .iconButton {
+    transition: none;
+  }
+
+  .todoCard:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .todoCard {
+    border: 2px solid #e0e6ed;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .badge {
+    border: 1px solid #e0e6ed;
+  }
+
+  .confirmationModal {
+    border: 2px solid #e0e6ed;
+    background: #0a0e27;
+  }
+}
+
+/* Landscape orientation optimization for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .confirmationOverlay {
+    align-items: center; /* Center modal in landscape */
+  }
+
+  .confirmationModal {
+    border-radius: 12px;
+    max-width: 400px;
+  }
+}

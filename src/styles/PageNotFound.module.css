@@ -1,0 +1,259 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.errorCode {
+  font-size: 120px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.errorIcon {
+  font-size: 80px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #e0e6ed;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #a0aec0;
+  margin-bottom: 32px;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.homeButton {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.homeButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .container {
+    padding: 32px 20px;
+    min-height: 50vh;
+  }
+
+  .errorCode {
+    font-size: 100px;
+  }
+
+  .errorIcon {
+    font-size: 64px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .homeButton {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+    min-height: 40vh;
+  }
+
+  .errorCode {
+    font-size: 80px;
+    margin-bottom: 12px;
+  }
+
+  .errorIcon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .homeButton {
+    padding: 14px 24px;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .homeButton:hover {
+    transform: none; /* Remove hover effects on mobile */
+    box-shadow: none;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 12px;
+  }
+
+  .errorCode {
+    font-size: 64px;
+  }
+
+  .errorIcon {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .homeButton {
+    padding: 12px 20px;
+    font-size: 15px;
+    max-width: 180px;
+  }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+  .errorCode {
+    font-size: 56px;
+  }
+
+  .errorIcon {
+    font-size: 36px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+}
+
+/* Large Desktop Enhancement */
+@media (min-width: 1440px) {
+  .container {
+    padding: 60px 40px;
+    min-height: 70vh;
+  }
+
+  .errorCode {
+    font-size: 140px;
+  }
+
+  .errorIcon {
+    font-size: 96px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    max-width: 600px;
+  }
+
+  .homeButton {
+    padding: 16px 36px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .homeButton {
+    transition: none;
+  }
+
+  .homeButton:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .homeButton {
+    border: 2px solid #e0e6ed;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .subtitle {
+    color: #e0e6ed;
+  }
+}
+
+/* Dark mode support (already dark, but for consistency) */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: transparent;
+  }
+}
+
+/* Loading state for button */
+.homeButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Focus states for accessibility */
+.homeButton:focus {
+  outline: 2px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
+}

@@ -1,0 +1,24 @@
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 100vh;
+  background-color: #0a0e27;
+  overflow: hidden;
+}
+
+/* Mobile First Approach - Stack layout for mobile */
+@media (max-width: 1024px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
+/* Large desktop enhancement */
+@media (min-width: 1440px) {
+  .app {
+    grid-template-columns: 300px 1fr;
+  }
+}

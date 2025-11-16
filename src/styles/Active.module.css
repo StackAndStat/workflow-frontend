@@ -1,0 +1,272 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.pageTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e0e6ed;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.activeCount {
+  color: #667eea;
+  font-size: 18px;
+  font-weight: 600;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.todoGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 20px;
+  color: #a0aec0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.emptyStateIcon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.emptyStateTitle {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #e0e6ed;
+  font-weight: 600;
+}
+
+.emptyStateText {
+  font-size: 14px;
+  opacity: 0.8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .pageTitle {
+    font-size: 26px;
+  }
+
+  .activeCount {
+    font-size: 16px;
+    padding: 7px 14px;
+  }
+
+  .todoGrid {
+    gap: 14px;
+  }
+
+  .emptyState {
+    padding: 60px 20px;
+  }
+
+  .emptyStateIcon {
+    font-size: 56px;
+  }
+
+  .emptyStateTitle {
+    font-size: 18px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 20px;
+    margin-bottom: 24px;
+    gap: 12px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .activeCount {
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+
+  .todoGrid {
+    gap: 12px;
+  }
+
+  .emptyState {
+    padding: 40px 20px;
+    border-radius: 12px;
+  }
+
+  .emptyStateIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .emptyStateTitle {
+    font-size: 18px;
+  }
+
+  .emptyStateText {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .pageTitle {
+    font-size: 22px;
+  }
+
+  .activeCount {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .todoGrid {
+    gap: 10px;
+  }
+
+  .emptyState {
+    padding: 32px 16px;
+    border-radius: 10px;
+  }
+
+  .emptyStateIcon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .emptyStateTitle {
+    font-size: 17px;
+  }
+
+  .emptyStateText {
+    font-size: 13px;
+  }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+  .pageTitle {
+    font-size: 20px;
+  }
+
+  .activeCount {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+  .emptyState {
+    padding: 24px 12px;
+  }
+
+  .emptyStateIcon {
+    font-size: 36px;
+  }
+}
+
+/* Large Desktop Enhancement */
+@media (min-width: 1440px) {
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .pageTitle {
+    font-size: 32px;
+  }
+
+  .activeCount {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+
+  .todoGrid {
+    gap: 20px;
+  }
+
+  .emptyState {
+    padding: 100px 40px;
+    border-radius: 20px;
+  }
+
+  .emptyStateIcon {
+    font-size: 72px;
+  }
+
+  .emptyStateTitle {
+    font-size: 24px;
+  }
+
+  .emptyStateText {
+    font-size: 16px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .activeCount {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .activeCount {
+    border: 2px solid #667eea;
+    background: rgba(102, 126, 234, 0.2);
+  }
+
+  .emptyState {
+    border: 2px solid #e0e6ed;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Landscape orientation optimization for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .pageTitle {
+    text-align: left;
+    width: auto;
+  }
+
+  .activeCount {
+    align-self: auto;
+  }
+}
