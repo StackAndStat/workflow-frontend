@@ -1,0 +1,300 @@
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(102, 126, 234, 0.3);
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.spinnerSmall {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.spinnerLarge {
+  width: 64px;
+  height: 64px;
+  border-width: 4px;
+}
+
+.loadingText {
+  font-size: 16px;
+  color: #a0aec0;
+  font-weight: 500;
+  margin: 0;
+}
+
+.dots {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+}
+
+.dots::before,
+.dots::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #667eea;
+  animation: dots 1.4s infinite ease-in-out both;
+}
+
+.dots::before {
+  left: -8px;
+  animation-delay: -0.32s;
+}
+
+.dots::after {
+  left: 8px;
+  animation-delay: 0.32s;
+}
+
+.dots span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #667eea;
+  animation: dots 1.4s infinite ease-in-out both;
+}
+
+/* Pulse animation variant */
+.pulse {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  animation: pulse 2s infinite ease-in-out;
+  margin-bottom: 16px;
+}
+
+/* Skeleton loader for content */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeletonText {
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeletonTextShort {
+  width: 60%;
+}
+
+.skeletonTextMedium {
+  width: 80%;
+}
+
+.skeletonCard {
+  height: 120px;
+  margin-bottom: 16px;
+}
+
+/* Animations */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dots {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Inline loader for buttons and small elements */
+.inlineLoader {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #a0aec0;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  .loaderContainer {
+    padding: 48px 20px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .spinnerLarge {
+    width: 56px;
+    height: 56px;
+  }
+
+  .loadingText {
+    font-size: 15px;
+  }
+
+  .pulse {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .loaderContainer {
+    padding: 40px 16px;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+  }
+
+  .spinnerLarge {
+    width: 48px;
+    height: 48px;
+  }
+
+  .spinnerSmall {
+    width: 20px;
+    height: 20px;
+  }
+
+  .loadingText {
+    font-size: 14px;
+  }
+
+  .pulse {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+  }
+
+  .dots {
+    width: 16px;
+    height: 16px;
+  }
+
+  .dots::before,
+  .dots::after,
+  .dots span {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .loaderContainer {
+    padding: 32px 12px;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .loadingText {
+    font-size: 13px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .pulse,
+  .dots::before,
+  .dots::after,
+  .dots span,
+  .skeleton {
+    animation: none;
+  }
+
+  .spinner {
+    border: 3px solid #667eea;
+    border-top: 3px solid transparent;
+  }
+
+  .pulse {
+    opacity: 0.7;
+  }
+
+  .skeleton {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .spinner {
+    border-color: #e0e6ed;
+    border-top-color: #667eea;
+  }
+
+  .pulse {
+    background: #667eea;
+    border: 2px solid #e0e6ed;
+  }
+
+  .skeleton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #e0e6ed;
+  }
+}

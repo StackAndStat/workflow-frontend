@@ -4,23 +4,25 @@ import { getTodoStats } from "../utils/todoStats";
 import { getRecentTodos } from "../utils/sortedTodos";
 import TodoCard from "./TodoCard";
 import styles from "../styles/Dashboard.module.css";
+import Loader from "./Loader";
 
 function Dashboard() {
   const {
-    state: { todos },
+    state: { todos, status },
   } = useTask();
   const { user } = useDashboard();
   const stats = getTodoStats(todos);
   const recentTodos = getRecentTodos(todos, 5);
 
-  if (!user) {
-    return <div>Redirecting...</div>;
-  }
+  const email = user.name;
+  const username = email.split("@").at(0);
+
+  if (status === "loading") return <Loader variant="pulse" />;
 
   return (
     <>
       <div className={styles.header}>
-        <h1 className={styles.pageTitle}>Dashboard</h1>
+        <h1 className={styles.pageTitle}>{username}</h1>
       </div>
 
       <div className={styles.statsGrid}>

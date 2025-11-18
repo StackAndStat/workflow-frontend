@@ -1,12 +1,18 @@
 import { useTask } from "../Context/TaskContext";
+import { useDashboard } from "../hooks/useDashboard";
 import TodoCard from "./TodoCard";
+import Loader from "./Loader";
+import AuthError from "./AuthError";
 import styles from "../styles/Completed.module.css";
 
 function Completed() {
   const {
-    state: { todos },
+    state: { todos, status, errorMessage },
   } = useTask();
+  useDashboard();
   const completedTodos = todos.filter((todo) => todo.status === "completed");
+
+  if (status === "loading") return <Loader variant="pulse" />;
 
   return (
     <div>
@@ -16,7 +22,7 @@ function Completed() {
           {completedTodos.length} completed
         </div>
       </div>
-
+      {errorMessage && <AuthError />}
       {completedTodos.length === 0 ? (
         <div className={styles.emptyState}>
           <div className={styles.emptyStateIcon}>✅</div>

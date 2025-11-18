@@ -1,20 +1,26 @@
 import { useTask } from "../Context/TaskContext";
+import { useDashboard } from "../hooks/useDashboard";
 import TodoCard from "./TodoCard";
+import Loader from "./Loader";
+import AuthError from "./AuthError";
 import styles from "../styles/Active.module.css";
 
 function Active() {
   const {
-    state: { todos },
+    state: { todos, status, errorMessage },
   } = useTask();
-
+  useDashboard();
   const activeTodos = todos.filter((todo) => todo.status === "in-progress");
 
+  if (status === "loading") return <Loader variant="pulse" />;
   return (
     <div>
       <div className={styles.header}>
-        <h1 className={styles.pageTitle}>Active Tasks</h1>
+        <h1 className={styles.pageTitle}>Tasks</h1>
         <div className={styles.activeCount}>{activeTodos.length} active</div>
       </div>
+
+      {errorMessage && <AuthError />}
 
       {activeTodos.length === 0 ? (
         <div className={styles.emptyState}>

@@ -1,6 +1,8 @@
 import { useAuthForm } from "../hooks/useAuthForm";
 import { useAuthUI } from "../hooks/useAuthUI";
+import { useTask } from "../Context/TaskContext";
 import AuthError from "../components/AuthError";
+import Loader from "../components/Loader";
 import styles from "../styles/AuthPage.module.css";
 
 const AuthPage = () => {
@@ -16,6 +18,10 @@ const AuthPage = () => {
   const { getAuthTitle, getPasswordPlaceholder, getButtonText, getToggleText } =
     useAuthUI();
 
+  const {
+    state: { status },
+  } = useTask();
+
   const toggleText = getToggleText(isLogin);
 
   return (
@@ -25,7 +31,7 @@ const AuthPage = () => {
         <p className={styles.authSubtitle}>{getAuthTitle(isLogin)}</p>
 
         {errorMessage && <AuthError />}
-
+        {status === "loading" && <Loader variant="dots" />}
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label className={styles.label}>Email</label>

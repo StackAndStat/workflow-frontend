@@ -1,7 +1,11 @@
+import { useTodoRender } from "../hooks/useTodoRender";
+import { useDashboard } from "../hooks/useDashboard";
+import { useTask } from "../Context/TaskContext";
 import TodoCard from "./TodoCard";
 import TodoModal from "./TodoModal";
+import AuthError from "./AuthError";
+import Loader from "./Loader";
 import styles from "../styles/AllTask.module.css";
-import { useTodoRender } from "../hooks/useTodoRender";
 
 function AllTask() {
   const {
@@ -17,6 +21,13 @@ function AllTask() {
     openModal,
     closeModal,
   } = useTodoRender();
+
+  const {
+    state: { status, errorMessage },
+  } = useTask();
+  useDashboard();
+
+  if (status === "loading") return <Loader variant="pulse" />;
 
   return (
     <div>
@@ -69,6 +80,8 @@ function AllTask() {
           <option value="Documentation">Documentation</option>
         </select>
       </div>
+
+      {errorMessage && <AuthError />}
 
       {filteredTodos.length === 0 ? (
         <div className={styles.emptyState}>

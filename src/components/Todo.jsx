@@ -1,12 +1,18 @@
 import { useTask } from "../Context/TaskContext";
+import { useDashboard } from "../hooks/useDashboard";
 import TodoCard from "./TodoCard";
+import AuthError from "./AuthError";
+import Loader from "./Loader";
 import styles from "../styles/TodoPage.module.css";
 
 function TodoPage() {
   const {
-    state: { todos },
+    state: { todos, status, errorMessage },
   } = useTask();
+  useDashboard();
   const todoTasks = todos.filter((todo) => todo.status === "todo");
+
+  if (status === "loading") return <Loader variant="pulse" />;
 
   return (
     <div>
@@ -14,6 +20,8 @@ function TodoPage() {
         <h1 className={styles.pageTitle}>To Do Tasks</h1>
         <div className={styles.todoCount}>{todoTasks.length} pending</div>
       </div>
+
+      {errorMessage && <AuthError />}
 
       {todoTasks.length === 0 ? (
         <div className={styles.emptyState}>

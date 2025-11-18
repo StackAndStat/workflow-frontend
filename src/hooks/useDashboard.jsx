@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTask } from "../Context/TaskContext";
 
 const useDashboard = () => {
@@ -8,19 +7,14 @@ const useDashboard = () => {
     dispatch,
   } = useTask();
 
-  const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_URL;
 
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-      return;
-    }
-
     const { id } = user;
 
     async function fetchTodos() {
       dispatch({ type: "CLEAR_ERROR" });
+      dispatch({ type: "SET_STATUS", payload: "loading" });
       try {
         const res = await fetch(`${baseUrl}/todos/${id}`);
         const data = await res.json();
@@ -37,7 +31,7 @@ const useDashboard = () => {
     }
 
     fetchTodos();
-  }, [baseUrl, user, dispatch, navigate]);
+  }, [baseUrl, user, dispatch]);
 
   return { user };
 };

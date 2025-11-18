@@ -17,6 +17,7 @@ const getInitialState = () => {
     todos: [],
     searchQuery: "",
     filter: { status: "all", priority: "all", category: "all" },
+    status: "authentication",
   };
 };
 
@@ -24,21 +25,25 @@ const initialValue = getInitialState();
 
 function reducer(state, action) {
   switch (action.type) {
-    case "LOGIN_SUCCESS":
+    case "LOGIN_SUCCESS": {
       localStorage.setItem("user", JSON.stringify(action.payload));
       localStorage.setItem("isAuthenticated", true);
+      const storedPage = localStorage.getItem("page");
 
       return {
         ...state,
         user: action.payload,
         isAuthenticated: true,
-        activePage: "dashboard",
+        activePage: storedPage ? storedPage : "dashboard",
+        status: "active",
       };
+    }
 
     case "SET_ERROR":
       return {
         ...state,
         errorMessage: action.payload,
+        status: "error",
       };
 
     case "CLEAR_ERROR":
@@ -59,9 +64,10 @@ function reducer(state, action) {
         todos: [],
         errorMessage: "",
         activePage: "",
+        status: "authentication",
       };
 
-    case "SET_ACTIVE":
+    case "SET_ACTIVE_PAGE":
       localStorage.setItem("page", action.payload);
       return {
         ...state,
@@ -72,6 +78,7 @@ function reducer(state, action) {
       return {
         ...state,
         todos: action.payload,
+        status: "active",
       };
 
     case "SET_UPDATED_TODO":
@@ -104,6 +111,12 @@ function reducer(state, action) {
       return {
         ...state,
         todos: [...state.todos, action.payload],
+      };
+
+    case "SET_STATUS":
+      return {
+        ...state,
+        status: action.payload,
       };
     default:
       return state;

@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-import { navItems } from "../data/navItems";
-import { useTask } from "../Context/TaskContext";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useTask } from "../Context/TaskContext";
+import { navItems } from "../data/navItems";
 import styles from "../styles/Sidebar.module.css";
 
 const Sidebar = () => {
@@ -18,7 +18,7 @@ const Sidebar = () => {
   }
 
   function handleNavClick(path) {
-    dispatch({ type: "SET_ACTIVE", payload: path });
+    dispatch({ type: "SET_ACTIVE_PAGE", payload: path });
     setIsMobileOpen(false);
   }
 
@@ -75,7 +75,7 @@ const Sidebar = () => {
                 activePage === item.path ? styles.mobileNavItemActive : ""
               }`}
               onClick={() =>
-                dispatch({ type: "SET_ACTIVE", payload: item.path })
+                dispatch({ type: "SET_ACTIVE_PAGE", payload: item.path })
               }
             >
               <span className={styles.mobileNavIcon}>{item.icon}</span>

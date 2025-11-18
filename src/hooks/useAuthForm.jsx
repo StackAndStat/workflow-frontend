@@ -21,9 +21,10 @@ const useAuthForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch({ type: "CLEAR_ERROR" });
-
     const endpoint = isLogin ? "/login" : "/register";
+
+    dispatch({ type: "CLEAR_ERROR" });
+    dispatch({ type: "SET_STATUS", payload: "loading" });
 
     try {
       const res = await fetch(`${baseUrl}${endpoint}`, {
