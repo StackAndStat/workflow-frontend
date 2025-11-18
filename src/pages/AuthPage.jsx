@@ -4,6 +4,8 @@ import { useTask } from "../Context/TaskContext";
 import AuthError from "../components/AuthError";
 import Loader from "../components/Loader";
 import styles from "../styles/AuthPage.module.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AuthPage = () => {
   const {
@@ -14,15 +16,17 @@ const AuthPage = () => {
     handleSubmit,
     toggleAuthMode,
   } = useAuthForm();
-
   const { getAuthTitle, getPasswordPlaceholder, getButtonText, getToggleText } =
     useAuthUI();
-
   const {
-    state: { status },
+    state: { status, isAuthenticated, activePage },
   } = useTask();
-
+  const navigate = useNavigate();
   const toggleText = getToggleText(isLogin);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate(`/app/${activePage}`);
+  }, [isAuthenticated, activePage, navigate]);
 
   return (
     <div className={styles.authContainer}>

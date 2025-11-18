@@ -14,7 +14,7 @@ function Dashboard() {
   const stats = getTodoStats(todos);
   const recentTodos = getRecentTodos(todos, 5);
 
-  const email = user.name;
+  const email = user?.name;
   const username = email.split("@").at(0);
 
   if (status === "loading") return <Loader variant="pulse" />;
