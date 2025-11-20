@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { useTodoRender } from "../hooks/useTodoRender";
 import { useDashboard } from "../hooks/useDashboard";
 import { useTask } from "../Context/TaskContext";
+import { useModal } from "../Context/ModalContext";
 import TodoCard from "./TodoCard";
 import AuthError from "./AuthError";
 import Loader from "./Loader";
 import styles from "../styles/AllTask.module.css";
 import AddTodoModal from "./AddTodoModal";
-// import TodoModal from "./TodoModal";
 
 function AllTask() {
+  console.log("from alltask");
   const {
     state: { status, errorMessage },
   } = useTask();
@@ -26,7 +26,7 @@ function AllTask() {
     handleAddTodo,
   } = useTodoRender();
 
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const { isAddModalOpen, setIsAddModalOpen } = useModal();
 
   if (status === "loading") return <Loader variant="pulse" />;
 

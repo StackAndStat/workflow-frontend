@@ -1,12 +1,16 @@
 import { useTodoRender } from "../hooks/useTodoRender";
-import TodoModal from "./TodoModal";
+import AddTodoModal from "./AddTodoModal";
+import { useModal } from "../Context/ModalContext";
+// import TodoModal from "./TodoModal";
 import styles from "../styles/EmptyTodo.module.css";
 
 const EmptyTodo = ({
   message = "No tasks yet",
   description = "Create your first task to get started!",
 }) => {
-  const { openModal, showModal, closeModal, handleAddTodo } = useTodoRender();
+  const { handleAddTodo } = useTodoRender();
+  const { isAddModalOpen, setIsAddModalOpen } = useModal();
+  console.log("coming from empty");
 
   return (
     <>
@@ -19,11 +23,16 @@ const EmptyTodo = ({
       <button
         className={styles.addButton}
         title="Add new task"
-        onClick={openModal}
+        onClick={() => setIsAddModalOpen(true)}
       >
         +
       </button>
-      {showModal && <TodoModal onClose={closeModal} onSave={handleAddTodo} />}
+
+      <AddTodoModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSave={(data) => handleAddTodo(data, () => setIsAddModalOpen(false))}
+      />
     </>
   );
 };

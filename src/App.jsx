@@ -9,26 +9,29 @@ import Active from "./components/Active";
 import Completed from "./components/Completed";
 import PageNotFound from "./components/PageNotFound";
 import TodoPage from "./components/Todo";
+import { ModalProvider } from "./Context/ModalContext";
 
 function App() {
   return (
     <TaskProvider>
-      <AuthInitializer>
-        <Router>
-          <Routes>
-            <Route path="/" element={<AuthPage />} />
-            <Route path="/app" element={<AppLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="allTask" element={<AllTask />} />
-              <Route path="todo" element={<TodoPage />} />
-              <Route path="active" element={<Active />} />
-              <Route path="completed" element={<Completed />} />
-            </Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Router>
-      </AuthInitializer>
+      <ModalProvider>
+        <AuthInitializer>
+          <Router>
+            <Routes>
+              <Route path="/" element={<AuthPage />} />
+              <Route path="/app" element={<AppLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="allTask" element={<AllTask />} />
+                <Route path="todo" element={<TodoPage />} />
+                <Route path="active" element={<Active />} />
+                <Route path="completed" element={<Completed />} />
+              </Route>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Router>
+        </AuthInitializer>
+      </ModalProvider>
     </TaskProvider>
   );
 }

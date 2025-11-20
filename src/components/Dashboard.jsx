@@ -2,7 +2,6 @@ import { useTask } from "../Context/TaskContext";
 import { useDashboard } from "../hooks/useDashboard";
 import { getTodoStats } from "../utils/todoStats";
 import { getRecentTodos } from "../utils/sortedTodos";
-// import TodoCard from "./TodoCard";
 import styles from "../styles/Dashboard.module.css";
 import Loader from "./Loader";
 import TodoList from "./TodoList";
