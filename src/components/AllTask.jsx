@@ -1,31 +1,32 @@
+import { useState } from "react";
 import { useTodoRender } from "../hooks/useTodoRender";
 import { useDashboard } from "../hooks/useDashboard";
 import { useTask } from "../Context/TaskContext";
 import TodoCard from "./TodoCard";
-import TodoModal from "./TodoModal";
 import AuthError from "./AuthError";
 import Loader from "./Loader";
 import styles from "../styles/AllTask.module.css";
+import AddTodoModal from "./AddTodoModal";
+// import TodoModal from "./TodoModal";
 
 function AllTask() {
+  const {
+    state: { status, errorMessage },
+  } = useTask();
+  useDashboard();
+
   const {
     searchQuery,
     filter,
     filteredTodos,
-    showModal,
     handleSearchChange,
     handleStatusChange,
     handlePriorityChange,
     handleCategoryChange,
     handleAddTodo,
-    openModal,
-    closeModal,
   } = useTodoRender();
 
-  const {
-    state: { status, errorMessage },
-  } = useTask();
-  useDashboard();
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   if (status === "loading") return <Loader variant="pulse" />;
 
@@ -100,12 +101,16 @@ function AllTask() {
       <button
         className={styles.addButton}
         title="Add new task"
-        onClick={openModal}
+        onClick={() => setIsAddModalOpen(true)}
       >
         +
       </button>
 
-      {showModal && <TodoModal onClose={closeModal} onSave={handleAddTodo} />}
+      <AddTodoModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSave={(data) => handleAddTodo(data, () => setIsAddModalOpen(false))}
+      />
     </div>
   );
 }

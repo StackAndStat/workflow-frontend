@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
 
-  /* Hide scrollbar by default */
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -13,7 +12,6 @@
     background: transparent;
   }
 
-  /* Show scrollbar on hover for desktop */
   &:hover {
     scrollbar-width: thin;
     scrollbar-color: rgba(193, 193, 193, 0.3) rgba(241, 241, 241, 0.1);
@@ -34,7 +32,6 @@
   }
 }
 
-/* Main content area with proper spacing */
 .mainContent {
   flex: 1;
   padding: 32px;
@@ -43,7 +40,6 @@
   gap: 24px;
 }
 
-/* Header section for page titles */
 .pageHeader {
   display: flex;
   justify-content: space-between;
@@ -64,7 +60,6 @@
   margin: 0;
 }
 
-/* Content container */
 .contentContainer {
   flex: 1;
   background: rgba(255, 255, 255, 0.02);
@@ -74,7 +69,6 @@
   backdrop-filter: blur(10px);
 }
 
-/* Tablet Styles */
 @media (max-width: 1024px) {
   .mainContent {
     padding: 24px;
@@ -91,13 +85,11 @@
   }
 }
 
-/* Mobile Styles */
 @media (max-width: 768px) {
   .main {
     min-height: calc(100vh - 60px);
-    padding-bottom: 60px; /* Space for bottom nav */
+    padding-bottom: 60px;
 
-    /* Always show thin scrollbar on mobile */
     scrollbar-width: thin;
     scrollbar-color: rgba(193, 193, 193, 0.3) transparent;
 
@@ -132,7 +124,6 @@
   }
 }
 
-/* Small Mobile Styles */
 @media (max-width: 480px) {
   .mainContent {
     padding: 12px;
@@ -149,7 +140,6 @@
   }
 }
 
-/* Large Desktop */
 @media (min-width: 1440px) {
   .mainContent {
     padding: 40px;
@@ -165,7 +155,6 @@
   }
 }
 
-/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .main {
     scrollbar-width: thin;

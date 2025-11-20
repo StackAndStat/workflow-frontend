@@ -2,9 +2,10 @@ import { useTask } from "../Context/TaskContext";
 import { useDashboard } from "../hooks/useDashboard";
 import { getTodoStats } from "../utils/todoStats";
 import { getRecentTodos } from "../utils/sortedTodos";
-import TodoCard from "./TodoCard";
+// import TodoCard from "./TodoCard";
 import styles from "../styles/Dashboard.module.css";
 import Loader from "./Loader";
+import TodoList from "./TodoList";
 
 function Dashboard() {
   const {
@@ -15,7 +16,7 @@ function Dashboard() {
   const recentTodos = getRecentTodos(todos, 5);
 
   const email = user?.name;
-  const username = email.split("@").at(0);
+  const username = email?.split("@").at(0);
 
   if (status === "loading") return <Loader variant="pulse" />;
 
@@ -54,9 +55,7 @@ function Dashboard() {
 
       <h2 className={styles.sectionTitle}>Recent Tasks</h2>
       <div className={styles.todoGrid}>
-        {recentTodos.map((todo) => (
-          <TodoCard key={todo.id} todo={todo} />
-        ))}
+        {recentTodos && <TodoList todos={recentTodos} />}
       </div>
     </>
   );

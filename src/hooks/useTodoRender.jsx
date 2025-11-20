@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTask } from "../Context/TaskContext";
 
 export function useTodoRender() {
@@ -6,11 +5,7 @@ export function useTodoRender() {
     state: { searchQuery, todos, filter, user },
     dispatch,
   } = useTask();
-
-  const [showModal, setShowModal] = useState(false);
-
   const baseURL = import.meta.env.VITE_URL;
-
   // Filter logic
   const filteredTodos = todos.filter((todo) => {
     const matchesSearch =
@@ -27,37 +22,36 @@ export function useTodoRender() {
   });
 
   // Add todo logic
-  const handleAddTodo = async (todoData) => {
+  const handleAddTodo = async (todoData, closeModalCallback) => {
     const newTodo = {
       ...todoData,
       created_at: new Date().toISOString().split("T")[0],
     };
     dispatch({ type: "CLEAR_ERROR" });
-
+    dispatch({ type: "SET_STATUS", payload: "loading" });
+    
     try {
       const res = await fetch(`${baseURL}/add/${user.id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTodo),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
         dispatch({ type: "SET_ERROR", payload: data.error });
         return;
       }
-
       dispatch({ type: "ADD_TODO", payload: data.data });
-      setShowModal(false);
+      dispatch({ type: "SET_STATUS", payload: "active" });
+      closeModalCallback();
     } catch (error) {
       dispatch({
         type: "SET_ERROR",
         payload: "There was an error adding new todo",
       });
+      dispatch({ type: "SET_STATUS", payload: "error" });
     }
   };
-
   // Filter handlers
   const handleSearchChange = (event) => {
     dispatch({ type: "SET_SEARCH", payload: event.target.value });
@@ -84,23 +78,25 @@ export function useTodoRender() {
     });
   };
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  // const openModal = () => setShowModal(true);
+  // const closeModal = () => setShowModal(false);
 
   return {
     // State
+
     searchQuery,
     filter,
     filteredTodos,
-    showModal,
+    // showModal,
 
     // Handlers
+
     handleSearchChange,
     handleStatusChange,
     handlePriorityChange,
     handleCategoryChange,
     handleAddTodo,
-    openModal,
-    closeModal,
+    // openModal,
+    // closeModal,
   };
 }

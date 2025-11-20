@@ -1,7 +1,12 @@
 import { useState } from "react";
 import styles from "../styles/TodoModal.module.css";
+import { useTask } from "../Context/TaskContext";
 
 const TodoModal = ({ todo, onClose, onSave }) => {
+  const {
+    state: { status },
+  } = useTask();
+
   const [formData, setFormData] = useState(
     todo || {
       title: "",
@@ -9,7 +14,7 @@ const TodoModal = ({ todo, onClose, onSave }) => {
       status: "todo",
       priority: "medium",
       category: "Personal",
-      due_date: "",
+      due_date: new Date().toISOString().split("T")[0],
     }
   );
 
@@ -125,12 +130,18 @@ const TodoModal = ({ todo, onClose, onSave }) => {
             <button
               type="button"
               className={styles.buttonSecondary}
-              onClick={() => onClose(false)}
+              onClick={onClose}
             >
               Cancel
             </button>
+
             <button type="submit" className={styles.buttonPrimary}>
-              {todo ? "Update Task" : "Create Task"}
+              {status === "loading"
+                ? "Loading"
+                : todo
+                ? "Update Task"
+                : "Create Task"}
+              {/* {todo ? "Update Task" : "Create Task"} */}
             </button>
           </div>
         </form>

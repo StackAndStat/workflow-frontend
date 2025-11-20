@@ -5,7 +5,7 @@ const baseURL = import.meta.env.VITE_URL;
 
 const useTodoCard = () => {
   const { dispatch } = useTask();
-  const [showModal, setShowModal] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState(null);
 
@@ -13,6 +13,7 @@ const useTodoCard = () => {
     const { id, title, description, category, status, priority, due_date } =
       updatedTodo;
 
+    dispatch({ type: "SET_STATUS", payload: "loading" });
     try {
       const res = await fetch(`${baseURL}/edit/${id}`, {
         method: "PUT",
@@ -32,9 +33,11 @@ const useTodoCard = () => {
         return;
       }
       dispatch({ type: "SET_UPDATED_TODO", payload: data.data });
-      setShowModal(false);
+      dispatch({ type: "SET_STATUS", payload: "active" });
+      setIsEditModalOpen(false);
     } catch (error) {
       dispatch({ type: "SET_ERROR", payload: error });
+      dispatch({ type: "SET_STATUS", payload: "error" });
     }
   };
 
@@ -46,6 +49,7 @@ const useTodoCard = () => {
   const handleDeleteConfirm = async () => {
     if (!todoToDelete) return;
 
+    dispatch({ type: "SET_STATUS", payload: "loading" });
     try {
       const { id } = todoToDelete;
       const res = await fetch(`${baseURL}/delete/${id}`, {
@@ -60,10 +64,12 @@ const useTodoCard = () => {
       }
 
       dispatch({ type: "DELETE_TODO", payload: id });
+      dispatch({ type: "SET_STATUS", payload: "active" });
       setShowDeleteConfirm(false);
       setTodoToDelete(null);
     } catch (error) {
       dispatch({ type: "SET_ERROR", payload: error });
+      dispatch({ type: "SET_STATUS", payload: "error" });
     }
   };
 
@@ -107,10 +113,10 @@ const useTodoCard = () => {
   };
 
   return {
-    showModal,
+    isEditModalOpen,
     showDeleteConfirm,
     todoToDelete,
-    setShowModal,
+    setIsEditModalOpen,
     handleSave,
     handleDeleteClick,
     handleDeleteConfirm,

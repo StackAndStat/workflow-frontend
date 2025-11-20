@@ -10,7 +10,9 @@ const useDashboard = () => {
   const baseUrl = import.meta.env.VITE_URL;
 
   useEffect(() => {
-    const { id } = user;
+    const id = user?.id;
+
+    if (!id) return;
 
     async function fetchTodos() {
       dispatch({ type: "CLEAR_ERROR" });

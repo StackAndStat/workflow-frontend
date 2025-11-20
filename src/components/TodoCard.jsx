@@ -5,10 +5,10 @@ import styles from "../styles/TodoCard.module.css";
 
 const TodoCard = ({ todo }) => {
   const {
-    showModal,
+    isEditModalOpen,
     showDeleteConfirm,
     todoToDelete,
-    setShowModal,
+    setIsEditModalOpen,
     handleSave,
     handleDeleteClick,
     handleDeleteConfirm,
@@ -19,11 +19,9 @@ const TodoCard = ({ todo }) => {
   return (
     <>
       <div className={styles.todoCard}>
+        {/* Header: Title and Action Buttons */}
         <div className={styles.todoHeader}>
-          <div className={styles.todoContent}>
-            <h3 className={styles.todoTitle}>{todo.title}</h3>
-            <p className={styles.todoDescription}>{todo.description}</p>
-          </div>
+          <h3 className={styles.todoTitle}>{todo.title}</h3>
           <div className={styles.actionButtons}>
             {todo.status !== "completed" && (
               <button
@@ -37,7 +35,7 @@ const TodoCard = ({ todo }) => {
             <button
               className={styles.iconButton}
               title="Edit"
-              onClick={() => setShowModal(true)}
+              onClick={() => setIsEditModalOpen(true)}
             >
               ✏️
             </button>
@@ -51,24 +49,32 @@ const TodoCard = ({ todo }) => {
           </div>
         </div>
 
+        {/* Description: Full width below header */}
+        {todo.description && (
+          <p className={styles.todoDescription}>{todo.description}</p>
+        )}
+
+        {/* Meta Information: Badges and Date */}
         <div className={styles.todoMeta}>
-          <span
-            className={`${styles.badge} ${styles[statusColors[todo.status]]}`}
-          >
-            {todo.status === "in-progress"
-              ? "In Progress"
-              : todo.status.charAt(0).toUpperCase() + todo.status.slice(1)}
-          </span>
-          <span
-            className={`${styles.badge} ${
-              styles[priorityColors[todo.priority]]
-            }`}
-          >
-            {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
-          </span>
-          <span className={`${styles.badge} ${styles.category}`}>
-            {todo.category}
-          </span>
+          <div className={styles.badges}>
+            <span
+              className={`${styles.badge} ${styles[statusColors[todo.status]]}`}
+            >
+              {todo.status === "in-progress"
+                ? "In Progress"
+                : todo.status.charAt(0).toUpperCase() + todo.status.slice(1)}
+            </span>
+            <span
+              className={`${styles.badge} ${
+                styles[priorityColors[todo.priority]]
+              }`}
+            >
+              {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
+            </span>
+            <span className={`${styles.badge} ${styles.category}`}>
+              {todo.category}
+            </span>
+          </div>
           {todo.due_date && (
             <span className={styles.dueDate}>
               📅 {new Date(todo.due_date).toLocaleDateString()}
@@ -100,8 +106,16 @@ const TodoCard = ({ todo }) => {
         </div>
       )}
 
-      {showModal && (
-        <TodoModal todo={todo} onClose={setShowModal} onSave={handleSave} />
+      {isEditModalOpen && (
+        <div className={styles.overlay}>
+          <div className={styles.modal}>
+            <TodoModal
+              todo={todo}
+              onClose={() => setIsEditModalOpen(false)}
+              onSave={handleSave}
+            />
+          </div>
+        </div>
       )}
     </>
   );
