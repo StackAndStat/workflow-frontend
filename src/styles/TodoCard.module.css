@@ -8,9 +8,15 @@
   backdrop-filter: blur(10px);
 }
 
+/* Remove the general hover effect from the card */
 .todoCard:hover {
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  border-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Keep subtle border, no transform */
+  transform: none;
 }
 
 .todoHeader {
@@ -23,7 +29,7 @@
 
 .todoContent {
   flex: 1;
-  min-width: 0; /* Prevents flex item from overflowing */
+  min-width: 0;
 }
 
 .todoTitle {
@@ -47,7 +53,7 @@
 .actionButtons {
   display: flex;
   gap: 8px;
-  flex-shrink: 0; /* Prevents buttons from shrinking */
+  flex-shrink: 0;
 }
 
 .iconButton {
@@ -62,14 +68,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px; /* Minimum touch target size */
+  min-width: 36px;
   min-height: 36px;
 }
 
+/* Individual button hover states */
 .iconButton:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
+.iconButton:active {
+  transform: translateY(0);
+}
+
+/* Focus states for accessibility */
+.iconButton:focus {
+  outline: 2px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
+}
+
+/* Complete button specific styles */
+.completeButton {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.completeButton:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+  transform: translateY(-1px);
+}
+
+.completeButton:active {
+  transform: translateY(0);
+}
+
+.completeButton:focus {
+  outline: 2px solid rgba(16, 185, 129, 0.5);
+  outline-offset: 2px;
+}
+
+/* Delete button specific styles */
 .deleteButton {
   color: #ef4444;
   border-color: rgba(239, 68, 68, 0.3);
@@ -77,6 +116,16 @@
 
 .deleteButton:hover {
   background-color: rgba(239, 68, 68, 0.1);
+  transform: translateY(-1px);
+}
+
+.deleteButton:active {
+  transform: translateY(0);
+}
+
+.deleteButton:focus {
+  outline: 2px solid rgba(239, 68, 68, 0.5);
+  outline-offset: 2px;
 }
 
 .todoMeta {
@@ -91,7 +140,7 @@
   border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
-  white-space: nowrap; /* Prevents badges from breaking */
+  white-space: nowrap;
 }
 
 /* Status Badges */
@@ -211,10 +260,26 @@
 
 .cancelButton:hover {
   background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.cancelButton:active {
+  transform: translateY(0);
 }
 
 .confirmButton:hover {
   background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.confirmButton:active {
+  transform: translateY(0);
+}
+
+.cancelButton:focus,
+.confirmButton:focus {
+  outline: 2px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
 }
 
 /* Tablet Styles */
@@ -243,23 +308,6 @@
     min-height: 34px;
   }
 
-  /* Add to your existing TodoCard.module.css */
-
-  .completeButton {
-    color: #10b981;
-    border-color: rgba(16, 185, 129, 0.3);
-  }
-
-  .completeButton:hover {
-    background-color: rgba(16, 185, 129, 0.1);
-  }
-
-  /* Optional: Add a subtle animation when task is completed */
-  .todoCard.completed {
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-  }
-
   .todoMeta {
     gap: 10px;
   }
@@ -275,11 +323,6 @@
   .todoCard {
     padding: 16px;
     border-radius: 12px;
-  }
-
-  .todoCard:hover {
-    transform: none; /* Remove hover effects on mobile */
-    border-color: rgba(255, 255, 255, 0.05);
   }
 
   .todoHeader {
@@ -311,9 +354,41 @@
 
   .iconButton {
     padding: 10px;
-    min-width: 44px; /* Minimum touch target for mobile */
+    min-width: 44px;
     min-height: 44px;
     font-size: 16px;
+  }
+
+  /* Remove hover effects on mobile touch devices */
+  .iconButton:hover {
+    transform: none;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .completeButton:hover {
+    transform: none;
+    background-color: rgba(16, 185, 129, 0.05);
+  }
+
+  .deleteButton:hover {
+    transform: none;
+    background-color: rgba(239, 68, 68, 0.05);
+  }
+
+  /* Enhanced active states for mobile */
+  .iconButton:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(0.95);
+  }
+
+  .completeButton:active {
+    background-color: rgba(16, 185, 129, 0.15);
+    transform: scale(0.95);
+  }
+
+  .deleteButton:active {
+    background-color: rgba(239, 68, 68, 0.15);
+    transform: scale(0.95);
   }
 
   .todoMeta {
@@ -330,10 +405,9 @@
     font-size: 11px;
   }
 
-  /* Confirmation Modal Mobile Styles */
   .confirmationOverlay {
     padding: 12px;
-    align-items: flex-end; /* Bottom sheet style for mobile */
+    align-items: flex-end;
   }
 
   .confirmationModal {
@@ -343,7 +417,7 @@
   }
 
   .confirmationButtons {
-    flex-direction: column-reverse; /* Better for thumb reach */
+    flex-direction: column-reverse;
     gap: 8px;
   }
 
@@ -352,6 +426,16 @@
     width: 100%;
     padding: 12px;
     min-width: auto;
+  }
+
+  .cancelButton:hover,
+  .confirmButton:hover {
+    transform: none;
+  }
+
+  .cancelButton:active,
+  .confirmButton:active {
+    transform: scale(0.98);
   }
 }
 
@@ -457,11 +541,25 @@
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .todoCard,
-  .iconButton {
+  .iconButton,
+  .cancelButton,
+  .confirmButton {
     transition: none;
   }
 
-  .todoCard:hover {
+  .iconButton:hover,
+  .completeButton:hover,
+  .deleteButton:hover,
+  .cancelButton:hover,
+  .confirmButton:hover {
+    transform: none;
+  }
+
+  .iconButton:active,
+  .completeButton:active,
+  .deleteButton:active,
+  .cancelButton:active,
+  .confirmButton:active {
     transform: none;
   }
 }
@@ -481,12 +579,20 @@
     border: 2px solid #e0e6ed;
     background: #0a0e27;
   }
+
+  .iconButton:focus,
+  .completeButton:focus,
+  .deleteButton:focus,
+  .cancelButton:focus,
+  .confirmButton:focus {
+    outline: 3px solid #667eea;
+  }
 }
 
 /* Landscape orientation optimization for mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .confirmationOverlay {
-    align-items: center; /* Center modal in landscape */
+    align-items: center;
   }
 
   .confirmationModal {
